@@ -2,7 +2,8 @@
 A repository created for educational purposes
 
 
-ansible lab 1
+**ansible lab 1**
+
 Скопировать в корень директории папку labs и ключи для ssh
 
 Сконфигурировать vagrant.config + проверить корректность настроек созданных VM и заданным настрокам в конфиге.
