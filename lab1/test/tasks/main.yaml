@@ -1,0 +1,53 @@
+--- 
+- name: Disable debug-shell SystemD Service
+  ansible.builtin.systemd:
+    name: debug-shell
+    enabled: no
+  tags:
+    - security
+
+- name: Disable Ctrl-Alt-Del Reboot Activation
+  ansible.builtin.file:
+    src: /dev/null
+    dest: /etc/systemd/system/ctrl-alt-del.target
+    state: link
+  become: true
+  tags:
+    - security
+
+- name: Disable Ctrl-Alt-Del Burst Action
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/system.conf
+    line: CtrlAltDelBurstAction=none
+    create: yes
+  become: true
+  tags:
+    - security
+
+- name: Ensure home Directories are Created for New Users
+  ansible.builtin.lineinfile:
+    path: /etc/login.defs
+    line: CREATE_HOME yes
+    create: yes
+  become: true
+  tags:
+    - security
+
+- name: Set password Hashing Algorithms in /etc/login.defs
+  ansible.builtin.lineinfile:
+    path: /etc/login.defs
+    line: ENCRYPT_METHOD SHA512
+    create: yes
+  become: true
+  tags:
+    - security
+
+- name: Set Account Expiration Following Inactivity
+  ansible.builtin.lineinfile:
+    path: /etc/default/useradd
+    regex: '.*INACTIVE=.*'
+    line: INACTIVE=35
+    create: yes
+  become: true
+  tags:
+    - security
