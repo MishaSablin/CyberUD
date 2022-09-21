@@ -17,18 +17,12 @@
         - continue
     
     - name: Set config
-      template:
+      copy:
         src: "{{ nginx_conf }}"
         dest: /etc/nginx/sites-available/default
         mode: preserve
       tags:
         - continue
-      template:
-        src: "{{ nginx_conf }}"
-        dest: /etc/nginx/sites-available/default
-      notify: Restart
-      tags:
-        - continue2
 
     - name: New site
       file:
