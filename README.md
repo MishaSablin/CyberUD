@@ -128,7 +128,7 @@
 
 ### **Решение:**
 
-Для митигации уязвимости, нужно заменить уязвимый блок кода на:
+Для митигации уязвимости, нужно заменить уязвимый блок кода:
 
 		/* POTENTIAL FLAW: command injection */
 		Process process = Runtime.getRuntime().exec(osCommand + data);
