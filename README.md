@@ -128,15 +128,18 @@
 
 ### **Решение:**
 
-Замена блоков кода:
+Для нивелирования рисков связанных с рассматриваемой уязвимостью, нужно заменить уязвимый блок кода:
 
- /* POTENTIAL FLAW: command injection */
-    Process process = Runtime.getRuntime().exec(osCommand + data);
-    process.waitFor();
+		/* POTENTIAL FLAW: command injection */
+		Process process = Runtime.getRuntime().exec(osCommand + data);
+        process.waitFor();
 	
-На следующий код:
+На следующую реализацию:
 
- Process safeProcess = new ProcessBuilder(osCommand, data).start();
+             
+        Process p = new ProcessBuilder(osCommand, data).start();
+        
        
 	   
-Так же, в случае необходимости, если команда заранее неизвестна, необходимо добавить проверку по черному/белому списку. Список потенциально опасных команд: https://gtfobins.github.io/#
+> Так же, есть вариант использования **org.owasp.esapi.reference.DefaultExecutor**. 
+> Примеры исползования: https://www.tabnine.com/code/java/classes/org.owasp.esapi.reference.DefaultExecutor 
