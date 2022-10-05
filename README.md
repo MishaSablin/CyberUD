@@ -1,12 +1,10 @@
-Уязвимости OS Command injection
-Домашнее задание
-Пример уязвимого Java кода:
+# **Уязвимости OS Command injection**
 
-import testcasesupport.*;
-import javax.servlet.http.*;
+# **Домашнее задание**
 
-public class CWE78_OS_Command_Injection__getParameter_Servlet_10 extends AbstractTestCaseServlet
-{
+### **Пример уязвимого Java кода:**
+
+
     /* uses badsource and badsink */
     public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
     {
@@ -127,5 +125,18 @@ public class CWE78_OS_Command_Injection__getParameter_Servlet_10 extends Abstrac
     {
         mainFromParent(args);
     }
-}
 
+### **Решение:**
+
+Замена блоков кода:
+
+ /* POTENTIAL FLAW: command injection */
+    Process process = Runtime.getRuntime().exec(osCommand + data);
+    process.waitFor();
+	
+На следующий код:
+
+ Process safeProcess = new ProcessBuilder(osCommand, data).start();
+       
+	   
+Так же, в случае необходимости, если команда заранее неизвестна, необходимо добавить проверку по черному/белому списку. Список потенциально опасных команд: https://gtfobins.github.io/#
