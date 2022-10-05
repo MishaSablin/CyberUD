@@ -4,7 +4,12 @@
 
 ### **Пример уязвимого Java кода:**
 
+```
+import testcasesupport.*;
+import javax.servlet.http.*;
 
+public class CWE78_OS_Command_Injection__getParameter_Servlet_10 extends AbstractTestCaseServlet
+{
     /* uses badsource and badsink */
     public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
     {
@@ -125,7 +130,8 @@
     {
         mainFromParent(args);
     }
-
+}
+```
 ### **Решение:**
 
 Для митигации уязвимости, нужно заменить уязвимый блок кода:
