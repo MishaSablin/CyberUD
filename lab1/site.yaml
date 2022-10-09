@@ -1,7 +1,0 @@
----
-- name: test ansible site
-  become: true
-  hosts: all
-  gather_facts: no
-  roles:
-  - test1
